@@ -1,0 +1,55 @@
+# Copyright 2025 dah4k
+# SPDX-License-Identifier: EPL-2.0
+
+FROM opensuse/leap:15.6 AS builder
+
+## Restore man-pages and other documentation
+RUN sed -i 's/^rpm.install.excludedocs.*/rpm.install.excludedocs = no/' /etc/zypp/zypp.conf
+
+## Install Theia IDE build requirements
+## https://github.com/eclipse-theia/theia/blob/master/doc/Developing.md
+RUN zypper --quiet --non-interactive refresh \
+ && zypper --quiet --non-interactive install --no-recommends \
+        ## Build requirements \
+        binutils \
+        cmake \
+        cross-arm-binutils \
+        cross-arm-gcc15 \
+        cross-arm-linux-glibc-devel \
+        gcc \
+        gcc-c++ \
+        git \
+        make \
+        python312 \
+        ## Runtime requirements \
+        supervisor \
+        ## Other devel tools \
+        ctags \
+        curl \
+        dust \
+        fd \
+        file \
+        gdb \
+        iproute2 \
+        jq \
+        man \
+        man-pages \
+        man-pages-posix \
+        patch \
+        plocate \
+        ripgrep \
+        tokei \
+        valgrind \
+        vim \
+        vim-data \
+ && zypper --quiet --non-interactive clean
+
+## Create user
+ARG USERNAME=osdev
+RUN groupadd --gid 1000 ${USERNAME} \
+ && useradd --create-home --home-dir /home/${USERNAME} --uid 1000 --gid 1000 ${USERNAME}
+
+USER ${USERNAME}
+
+WORKDIR /home/${USERNAME}
+
