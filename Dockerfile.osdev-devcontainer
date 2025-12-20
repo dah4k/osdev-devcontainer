@@ -56,3 +56,6 @@ WORKDIR /home/${USERNAME}
 ## Git clone LiteOS
 RUN git clone https://gitee.com/LiteOS/LiteOS.git
 
+## Git clone RTEMS
+RUN git clone https://gitlab.rtems.org/RTEMS/RTOS/RTEMS.git
+
