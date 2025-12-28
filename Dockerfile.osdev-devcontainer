@@ -1,7 +1,7 @@
 # Copyright 2025 dah4k
 # SPDX-License-Identifier: EPL-2.0
 
-FROM opensuse/leap:15.6 AS builder
+FROM opensuse/leap:15.6
 
 ## Restore man-pages and other documentation
 RUN sed -i 's/^rpm.install.excludedocs.*/rpm.install.excludedocs = no/' /etc/zypp/zypp.conf
