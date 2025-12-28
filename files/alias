@@ -13,6 +13,11 @@ alias ls="ls -F --color=auto"
 alias rg="rg --sort path"
 alias v="vim -R"
 
+alias gcd="git checkout"
+alias gci="git commit"
+alias gdf="git diff"
+alias gst="git status"
+
 # Fix distros calling `fdfind`
 # Reference: https://github.com/sharkdp/fd/
 alias fd='_fd(){
