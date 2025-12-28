@@ -1,14 +1,6 @@
-#!/bin/bash
 # Copyright 2025 dah4k
 # SPDX-License-Identifier: MIT-0
-#
-# Shell prompt inspired by Photon and Kali Linux prompts. To install:
-#
-#   $ source prompt.shlib
-#
-# Known Issue:
-#   - Does not work with DaSH (Debian and Ubuntu default `/bin/sh`).
-#     Requires Bash-compatible or Ash (Alpine BusyBox `/bin/sh`).
+
 GIT_PROMPT_LOCATIONS="
     /etc/bash_completion.d/git-prompt.sh
     /etc/bash_completion.d/git-prompt
@@ -38,3 +30,5 @@ else
     # Fallback to `git` command
     export PS1="\A $RED\$(os_pretty_name) 💀 \u@\h [$NORM \w $RED] ($NORM \$(git symbolic-ref --short HEAD 2>/dev/null) $RED)$NORM\n\$ "
 fi
+
+[ -r $HOME/.alias ] && source $HOME/.alias
