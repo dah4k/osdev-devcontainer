@@ -21,11 +21,16 @@ RUN zypper --quiet --non-interactive refresh \
         git \
         make \
         python312 \
+        #python312-uv \
         ## Runtime requirements \
         supervisor \
         ## Other devel tools \
+        asciinema \
+        codespell \
+        coreutils \
         ctags \
         curl \
+        dnsmasq \
         dust \
         fd \
         file \
@@ -35,13 +40,22 @@ RUN zypper --quiet --non-interactive refresh \
         man \
         man-pages \
         man-pages-posix \
+        ntfsprogs \
         patch \
+        patterns-server-kvm_server \
         plocate \
+        pv \
+        qemu-headless \
         ripgrep \
+        socat \
+        tinyproxy \
+        tmux \
         tokei \
         valgrind \
         vim \
         vim-data \
+        virtme \
+        xz \
  && zypper --quiet --non-interactive clean
 
 ## Create user
