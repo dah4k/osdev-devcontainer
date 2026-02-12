@@ -6,53 +6,42 @@ FROM opensuse/leap:16.0
 ## Restore man-pages and other documentation
 RUN sed -i 's/^rpm.install.excludedocs.*/rpm.install.excludedocs = no/' /etc/zypp/zypp.conf
 
-## Install Theia IDE build requirements
-## https://github.com/eclipse-theia/theia/blob/master/doc/Developing.md
+## Install packages
 RUN zypper --quiet --non-interactive refresh \
  && zypper --quiet --non-interactive install --no-recommends \
-        ## Build requirements \
         binutils \
-        cmake \
         cross-arm-binutils \
         cross-arm-gcc15 \
         cross-arm-linux-glibc-devel \
-        gcc \
-        gcc-c++ \
-        git \
-        make \
-        python313 \
-        python313-uv \
-        ## Other devel tools \
-        asciinema \
-        codespell \
-        coreutils \
-        ctags \
         curl \
         dnsmasq \
-        dust \
         fd \
         file \
+        gcc \
+        gcc-c++ \
         gdb \
+        git \
         iproute2 \
+        iptables \
         jq \
+        make \
         man \
         man-pages \
         man-pages-posix \
-        ntfsprogs \
-        patch \
-        patterns-server-kvm_server \
-        plocate \
-        pv \
+        netcat-openbsd \
+        openssh \
+        qemu-arm \
         qemu-headless \
+        qemu-img \
+        qemu-microvm \
+        qemu-tools \
         ripgrep \
         socat \
+        tar \
         tinyproxy \
-        tmux \
-        tokei \
-        valgrind \
+        velociraptor \
         vim \
         vim-data \
-        virtme \
         xz \
  && zypper --quiet --non-interactive clean
 
@@ -67,10 +56,4 @@ COPY --chown=osdev:osdev files/alias /home/${USERNAME}/.alias
 USER ${USERNAME}
 
 WORKDIR /home/${USERNAME}
-
-## Git clone LiteOS
-RUN git clone https://gitee.com/LiteOS/LiteOS.git
-
-## Git clone RTEMS
-RUN git clone https://gitlab.rtems.org/RTEMS/RTOS/RTEMS.git
 
