@@ -31,10 +31,12 @@ RUN zypper --quiet --non-interactive refresh \
         netcat-openbsd \
         openssh \
         qemu-arm \
+        qemu-extra \
         qemu-headless \
         qemu-img \
         qemu-microvm \
         qemu-tools \
+        qemu-x86 \
         ripgrep \
         socat \
         tar \
