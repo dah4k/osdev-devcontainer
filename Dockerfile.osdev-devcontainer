@@ -52,8 +52,8 @@ ARG USERNAME=osdev
 RUN groupadd --gid 1000 ${USERNAME} \
  && useradd --create-home --home-dir /home/${USERNAME} --uid 1000 --gid 1000 ${USERNAME}
 
-COPY --chown=osdev:osdev files/bashrc /home/${USERNAME}/.bashrc
-COPY --chown=osdev:osdev files/alias /home/${USERNAME}/.alias
+COPY --chown=1000:1000 files/bashrc /home/${USERNAME}/.bashrc
+COPY --chown=1000:1000 files/alias /home/${USERNAME}/.alias
 
 USER ${USERNAME}
 
