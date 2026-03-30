@@ -45,6 +45,39 @@ RUN zypper --quiet --non-interactive refresh \
         vim \
         vim-data \
         xz \
+        ## Velociraptor additional build requirements \
+        ## README.md mentions Node v18.14.2 which was EOL since 2025... \
+        ## Github Action CI uses Go 1.25 and Node v22.19 on Ubuntu 22.04 \
+        go1.25 \
+        nodejs22 \
+        npm22 \
+        ## JetKVM RV1106 additional build requirements \
+        autoconf \
+        automake \
+        bc \
+        bison \
+        bzip2 \
+        cmake \
+        dbus-1-devel \
+        dpkg-devel \
+        dtc \
+        dwarves \
+        ed \
+        fakeroot \
+        flex \
+        gperf \
+        iproute2 \
+        kmod \
+        libelf-devel \
+        libgcrypt-devel \
+        libnl3-devel \
+        libopenssl-devel \
+        m4 \
+        mpc-devel \
+        openssl \
+        python313 \
+        sequoia-sq \
+        texinfo \
  && zypper --quiet --non-interactive clean
 
 ## Create user
@@ -59,3 +92,6 @@ USER ${USERNAME}
 
 WORKDIR /home/${USERNAME}
 
+RUN git clone https://github.com/Velocidex/velociraptor \
+ && git clone https://github.com/jetkvm/kvm \
+ && git clone https://github.com/jetkvm/rv1106-system
