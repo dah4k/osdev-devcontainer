@@ -78,7 +78,11 @@ RUN zypper --quiet --non-interactive refresh \
         python313 \
         sequoia-sq \
         texinfo \
+        which \
  && zypper --quiet --non-interactive clean
+
+## Workaround missing Ubuntu python-is-python3 package
+RUN ln -s /usr/bin/python3 /usr/bin/python
 
 ## Create user
 ARG USERNAME=osdev
