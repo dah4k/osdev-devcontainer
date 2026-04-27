@@ -21,7 +21,7 @@ $(REGISTRY)/%: Dockerfile.%
 
 .PHONY: test
 test: $(REGISTRY)/osdev-devcontainer ## Test runtime container image
-	$(DOCKER) run --interactive --tty --rm --name=osdev-devcontainer $<
+	$(DOCKER) run --interactive --tty --rm --privileged --name=osdev-devcontainer $<
 
 .PHONY: debug
 debug: ## Debug last run container image
