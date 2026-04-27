@@ -56,9 +56,6 @@ RUN ln -s /usr/bin/python3 /usr/bin/python
 ## FIXME: Setup KVM support in container
 ## See Also https://forums.docker.com/t/udevadm-control-reload-rules/135564
 RUN echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' > /etc/udev/rules.d/99-kvm4all.rules
-#RUN /lib/systemd/systemd-udevd --daemon
-#RUN udevadm control --reload-rules
-#RUN udevadm trigger --name-match=kvm
 
 ## Create user
 ARG USERNAME=osdev
@@ -68,9 +65,17 @@ RUN groupadd --gid 1000 ${USERNAME} \
 COPY --chown=1000:1000 files/bashrc /home/${USERNAME}/.bashrc
 COPY --chown=1000:1000 files/alias /home/${USERNAME}/.alias
 
-USER ${USERNAME}
-
 WORKDIR /home/${USERNAME}
 
 RUN git clone https://github.com/arighi/virtme-ng \
- && git clone https://github.com/Velocidex/velociraptor
+ && git clone https://github.com/Velocidex/velociraptor \
+ && chown --recursive 1000:1000 virtme-ng velociraptor
+
+## https://github.com/tianon/gosu/blob/master/INSTALL.md#others--lazy-method
+COPY --from=tianon/gosu /gosu /usr/local/bin/
+
+COPY --chown=0:0 entrypoint.sh /entrypoint.sh
+
+ENV USERNAME=${USERNAME}
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["vng", "-r", "v6.6", "-v", "--disable-microvm", "--", "uname", "-r"]
