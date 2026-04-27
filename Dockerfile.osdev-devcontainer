@@ -30,6 +30,9 @@ RUN zypper --quiet --non-interactive refresh \
         ## Virtmg-NG requires dpkg missing on RPM-based system \
         dpkg \
         virtme \
+        ## Virtme-NG rebuild requirements \
+        cargo \
+        rust \
         ## Velociraptor additional build requirements \
         ## README.md mentions Node v18.14.2 which was EOL since 2025... \
         ## Github Action CI uses Go 1.25 and Node v22.19 on Ubuntu 22.04 \
